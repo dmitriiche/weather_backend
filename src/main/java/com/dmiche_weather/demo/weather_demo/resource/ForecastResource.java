@@ -8,25 +8,24 @@ import java.io.IOException;
 import org.json.JSONObject;
 
 @RestController
-@RequestMapping("api/v1/weather")
-public class WeatherResource {
-
+@RequestMapping("api/v1/forecast")
+public class ForecastResource {
     private final WeatherService weatherService;
 
     @Autowired
-    public WeatherResource(WeatherService weatherService) {
+    public ForecastResource(WeatherService weatherService) {
         this.weatherService = weatherService;
     }
 
     @CrossOrigin
     @RequestMapping(
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE,
-        path = "{city_name}"
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            path = "{city_name}"
     )
     public String getCityByName(@PathVariable("city_name") String cityName) throws IOException {
 
-        JSONObject soapDatainJsonObject = weatherService.getWeatherByCityName(cityName);
+        JSONObject soapDatainJsonObject = weatherService.getFiveDayForecastByCityName(cityName);
 
         return soapDatainJsonObject.toString();
     }
