@@ -10,14 +10,14 @@ Available resources is:
 
 ## Running the application locally
 ### Using IntelliJ IDEA
--Open project directory in the IntelliJ IDEA
--Go to the /src/main/java/com.dmiche_weather.demo.weather_demo/ directory
--Right click on the WeatherDemoApplication class
--Select run
+- Open project directory in the IntelliJ IDEA
+- Go to the /src/main/java/com.dmiche_weather.demo.weather_demo/ directory
+- Right click on the WeatherDemoApplication class
+- Select run
 
 ### Using console
--Go to the project directory
--Run command mvn spring-boot:run
+- Go to the project directory
+- Run command mvn spring-boot:run
 
 Server start at the localhost:8090
 
@@ -28,6 +28,7 @@ Server start at the localhost:8090
 http://localhost:8080/api/v1/weather/{city_name}
 ###### Examples:
 http://localhost:8080/api/v1/weather/Oulu
+
 http://localhost:8080/api/v1/weather/London
 
 ### Get 5 day / 3 hour forecast data by city name
@@ -35,4 +36,5 @@ http://localhost:8080/api/v1/weather/London
 http://localhost:8080/api/v1/forecast/{city_name}
 ###### Examples:
 http://localhost:8080/api/v1/forecast/Oulu
+
 http://localhost:8080/api/v1/forecast/London
