@@ -23,10 +23,11 @@ public class ForecastResource {
             produces = MediaType.APPLICATION_JSON_VALUE,
             path = "{city_name}"
     )
-    public String getCityByName(@PathVariable("city_name") String cityName) throws IOException {
+    public String getFiveDayForecast(@PathVariable("city_name") String cityName) throws IOException {
 
         JSONObject soapDatainJsonObject = weatherService.getFiveDayForecastByCityName(cityName);
 
         return soapDatainJsonObject.toString();
+
     }
 }

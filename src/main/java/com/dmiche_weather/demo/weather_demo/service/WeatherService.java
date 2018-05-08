@@ -7,10 +7,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+import java.net.*;
 import java.util.Scanner;
 
 @Service
@@ -50,10 +47,21 @@ public class WeatherService {
     private String sendRequestToOpenweathermap(String url) throws IOException {
         URLConnection connection = new URL(url).openConnection();
         connection.setRequestProperty("Accept-Charset", charset);
-        InputStream response = connection.getInputStream();
-
+        InputStream inputStream = null;
+        try {
+            inputStream = connection.getInputStream();
+        } catch (IOException ioe) {
+            if (connection instanceof HttpURLConnection) {
+                HttpURLConnection httpConn = (HttpURLConnection) connection;
+                int statusCode = httpConn.getResponseCode();
+                if (statusCode != 200) {
+                    inputStream = httpConn.getErrorStream();
+                }
+            }
+        }
+        
         String responseBody = "";
-        try (Scanner scanner = new Scanner(response)) {
+        try (Scanner scanner = new Scanner(inputStream)) {
             responseBody = scanner.useDelimiter("\\A").next();
         }
         return responseBody;
